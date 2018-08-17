@@ -11,9 +11,35 @@
 	 crossorigin="anonymous">
 
 	<title>Survey</title>
+
+	<style type="css/stylesheet">
+		img {
+			max-width: 300px;
+		}
+	</style>
 </head>
 
 <body>
+	<div class="match-result modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalCenterTitle">Your Match!</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<h2 class="match-name"></h2>
+					<img class="match-img">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="container">
 		<h1>Survey Questions</h1>
 		<hr class="my-4">
@@ -184,24 +210,20 @@
 			};
 
 			for (let i = 1; i < 11; i ++) {
-				console.log(parseInt($(`.question-${i}`).val()));
 				newFriend.scores.push(parseInt($(`.question-${i}`).val()))
 			}
 
 			$.post("/api/friends", newFriend, function(data) {
 
 				if (data) {
-					alert("Yay! You are officially booked!");
+					console.log("Match data:");
 					console.log(data)
+					$(".match-name").text(data.name);
+					$(".match-img").attr({"src": data.photo, "alt": "../images/notfound_placeholder.svg"});
+					$(".match-result").modal('show');
 				} else {
-					alert("Sorry you are on the wait list");
+					alert("Sorry, we can't find you a match at the moment...")
 				}
-
-				// $("#reserve-name").val("");
-				// $("#reserve-phone").val("");
-				// $("#reserve-email").val("");
-				// $("#reserve-unique-id").val("");
-
 			});
 
 		});
