@@ -18,7 +18,15 @@ module.exports = function (app) {
         res.json(soulMate);
     });
 
+    /**
+     * Compare two number arrays and return the absolute value of differences.
+     * @param {number[]} a1 
+     * @param {number[]} a2 
+     */
     function arrDiffAbs(a1, a2) {
+        if (a1.length !== a2.length) {
+            throw `Array lengths are different!!!!`;
+        }
         let res = 0;
         for (let i = 0; i < a1.length; i++) {
             res += a1[i] - a2[i];
