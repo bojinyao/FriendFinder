@@ -5,7 +5,8 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use('/images', express.static('images'));
+// app.use('/images', express.static('images'));
+// app.use(express.static(__dirname + '/images'));
 
 const PORT = process.env.PORT || 8080;
 
