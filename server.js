@@ -5,6 +5,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static('images'));
 
 const PORT = process.env.PORT || 8080;
 
